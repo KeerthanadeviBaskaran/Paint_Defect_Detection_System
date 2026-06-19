@@ -1,4 +1,4 @@
-# Paint / Surface Defect Detection using Color Histogram and Decision Tree
+# Paint Defect Detection System
 
 ## Project Overview
 
