@@ -1,106 +1,236 @@
-# Paint Defect Detection System
+# Paint Defect Detection System using Machine Learning
 
 ## Project Overview
 
-This project automatically detects and classifies surface defects on metal sheets using **Color Histogram** as the feature extraction technique and **Decision Tree** as the classification model. Random Forest was also explored as an improvement on top of the base Decision Tree.
+The Paint Defect Detection System is a machine learning-based application designed to automatically identify and classify surface defects in metal sheets. The system extracts color histogram features from images and uses machine learning algorithms to predict the defect category.
 
-It is built as a complete end-to-end project — from raw image data all the way to a working web app where anyone can upload an image and get a prediction.
+The project was developed as an end-to-end solution, covering data preprocessing, feature extraction, model training, evaluation, and deployment through an interactive Streamlit web application.
+
+---
 
 ## Problem Statement
 
-In manufacturing, metal sheets often come out of production with surface defects. Manually inspecting every sheet is slow, inconsistent, and error-prone. This project automates that inspection using a machine learning model trained on real defect images.
+Manual inspection of industrial metal surfaces is time-consuming, expensive, and prone to human error. Defective products can lead to quality issues and increased manufacturing costs.
+
+This project aims to automate defect detection using machine learning techniques, enabling faster and more reliable quality inspection.
+
+---
 
 ## Dataset
 
-**NEU Surface Defect Dataset** (Kaggle)
+Dataset: NEU Surface Defect Database
 
-- Total images      : 1800
-- Classes           : 6 defect types
-- Images per class  : 300 (perfectly balanced)
+### Dataset Statistics
 
-| Defect Type     |
-|-----------------|
-| Crazing         |
-| Inclusion       |
-| Patches         |
-| Pitted Surface  |
-| Rolled-in Scale |
-| Scratches       |
+* Total Images: 1800
+* Number of Classes: 6
+* Images per Class: 300
+* Dataset Type: Balanced
 
-## Core Techniques
+### Defect Classes
 
-| Step               | Technique                                        |
-|--------------------|--------------------------------------------------|
-| Feature Extraction | Color Histogram (RGB, 32 bins × 3 channels = 96 features)|
-| Core Model         | Decision Tree Classifier                         |
-| Improved Model     | Random Forest (100 Decision Trees voting together)|
-| Evaluation         | Accuracy, Precision, Recall, Confusion Matrix    |
+1. Crazing
+2. Inclusion
+3. Patches
+4. Pitted Surface
+5. Rolled-in Scale
+6. Scratches
 
-## Workflow
+---
 
-Raw Image
-   ↓
-Color Histogram Extraction (96 features: 32 bins × 3 channels)
-   ↓
-Normalize Feature Vector
-   ↓
-Train / Test Split (80% train, 20% test)
-   ↓
-Decision Tree Classifier  ←── Core technique
-   ↓
-Random Forest (optional improvement)
-   ↓
-Evaluate on unseen images
+## Project Workflow
 
-## Results
+Image Input
+↓
+Image Preprocessing
+↓
+Color Histogram Feature Extraction
+(96 Features)
+↓
+Feature Normalization
+↓
+Train-Test Split
+↓
+Decision Tree / Random Forest
+↓
+Model Evaluation
+↓
+Streamlit Web Application
+↓
+Defect Prediction
 
-| Model                      | Accuracy |
-|----------------------------|----------|
-| Decision Tree (core model) | 93%      |
-| Random Forest (improved)   | 95%      |
+---
 
-The core project uses Decision Tree with Color Histogram features and achieves **93% accuracy**. Random Forest was explored as an extension and pushed accuracy to **95%** by combining 100 trees voting together.
+## Feature Extraction
 
-## Output
+Color Histogram was used to represent each image as a numerical feature vector.
 
-The model predicts one of 6 defect classes:
+### Histogram Configuration
 
-- Crazing
-- Inclusion
-- Patches
-- Pitted Surface
-- Rolled-in Scale
-- Scratches
+* Red Channel: 32 bins
+* Green Channel: 32 bins
+* Blue Channel: 32 bins
 
-Along with a **confidence score** for each class (e.g. "Scratches — 87% confidence").
+Total Features:
 
-## How to Run
+96 Features = 32 + 32 + 32
 
-1. Open the notebook in Google Colab
-2. Mount Google Drive and set the dataset path
-3. Run all cells from top to bottom
-4. Cell 26 launches the Gradio app with a public shareable link
-5. Upload any NEU defect image — the model returns the defect type instantly
+The extracted histogram features were normalized before training the machine learning models.
 
-## Libraries Used
+---
 
-- opencv-python — image loading and histogram extraction
-- numpy — array operations
-- scikit-learn — Decision Tree, Random Forest, evaluation metrics
-- matplotlib / seaborn — charts and confusion matrix
-- joblib — saving and loading the trained model
+## Machine Learning Models
+
+### Decision Tree Classifier
+
+The Decision Tree model serves as the primary classification algorithm.
+
+**Accuracy:** 93%
+
+### Random Forest Classifier
+
+An ensemble learning approach using 100 decision trees was implemented to improve classification performance.
+
+**Parameters:**
+
+* n_estimators = 100
+* random_state = 42
+
+**Accuracy:** 95%
+
+---
+
+## Performance Comparison
+
+| Model         | Accuracy |
+| ------------- | -------- |
+| Decision Tree | 93%      |
+| Random Forest | 95%      |
+
+Random Forest achieved higher accuracy by reducing overfitting and improving generalization performance.
+
+---
+
+## Web Application
+
+The trained model was deployed using Streamlit, allowing users to interact with the system through a simple web interface.
+
+### Features
+
+* Upload defect images
+* Automatic feature extraction
+* Real-time defect prediction
+* Support for six defect categories
+* User-friendly interface
+* Fast prediction results
+
+---
+
+## Prediction Output
+
+The system predicts one of the following defect classes:
+
+* Crazing
+* Inclusion
+* Patches
+* Pitted Surface
+* Rolled-in Scale
+* Scratches
+
+The application displays the predicted defect category immediately after image upload and analysis.
+
+---
+
+## Technologies Used
+
+### Programming Language
+
+* Python
+
+### Libraries
+
+* OpenCV
+* NumPy
+* Scikit-Learn
+* Joblib
+* Streamlit
+* Matplotlib
+* Seaborn
+
+---
 
 ## Project Structure
 
-paint_defect_detection_project/
-├── Paint_Defect_Detection.ipynb # main Colab notebook
-├── paint_defect_model.pkl # saved Decision Tree / Random Forest model
-├── class_names.json       # class label names
-└── README.md              # this file
+```text
+paint-defect-detection/
+│
+├── app.py
+├── Paint_Defect_Detection_Model.pkl
+├── Paint_Defect_Detection.ipynb
+├── README.md
+├── dataset/
+│
+├── images/
+│
+└── requirements.txt
+```
+
+---
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone <repository-link>
+cd paint-defect-detection
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the Streamlit application:
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## Results
+
+* Decision Tree achieved 93% classification accuracy.
+* Random Forest achieved 95% classification accuracy.
+* The model successfully classifies six different surface defect categories.
+* Streamlit deployment enables real-time prediction through a web interface.
+
+---
 
 ## Key Learnings
 
-- Images can be represented as compact feature vectors using color histograms
-- Decision Tree alone achieves strong results (93%) on this task
-- Random Forest improves accuracy further by reducing overfitting
-- Balanced datasets lead to fairer and more reliable models
+* Image data can be represented using color histogram features.
+* Feature normalization improves model performance.
+* Ensemble models such as Random Forest provide better accuracy than a single Decision Tree.
+* Streamlit simplifies machine learning model deployment.
+* End-to-end machine learning projects require data preprocessing, model development, evaluation, and deployment.
+
+---
+
+## Future Improvements
+
+* Deep Learning based CNN models
+* Defect localization using object detection
+* Real-time camera integration
+* Cloud deployment
+* Mobile application support
+
+---
+
+## Author
+
+Keerthanadevi Baskaran
+
+Machine Learning | Computer Vision | Artificial Intelligence
