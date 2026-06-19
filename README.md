@@ -219,16 +219,6 @@ streamlit run app.py
 
 ---
 
-## Future Improvements
-
-* Deep Learning based CNN models
-* Defect localization using object detection
-* Real-time camera integration
-* Cloud deployment
-* Mobile application support
-
----
-
 ## Author
 
 Keerthanadevi Baskaran
