@@ -1,134 +1,33 @@
-# Paint Defect Detection System using Machine Learning
+# 🎨 Paint Defect Detection System using Machine Learning & Agentic AI
 
 ## Project Overview
 
-The Paint Defect Detection System is a machine learning-based application designed to automatically identify and classify surface defects in metal sheets. The system extracts color histogram features from images and uses machine learning algorithms to predict the defect category.
+The **Paint Defect Detection System** is a Machine Learning and Agentic AI-based application that automatically detects and classifies surface defects in steel sheets. The system extracts color histogram features from uploaded images and uses a trained **Random Forest Classifier** to predict the defect category.
 
-The project was developed as an end-to-end solution, covering data preprocessing, feature extraction, model training, evaluation, and deployment through an interactive Streamlit web application.
+To demonstrate modern AI application development, the project also integrates **Agentic AI concepts** including **Skills, Agents, Prompts, Instructions, and Hooks**, making the application modular, reusable, and extensible.
 
 ---
 
-## Problem Statement
+# Problem Statement
 
 Manual inspection of industrial metal surfaces is time-consuming, expensive, and prone to human error. Defective products can lead to quality issues and increased manufacturing costs.
 
-This project aims to automate defect detection using machine learning techniques, enabling faster and more reliable quality inspection.
+This project automates defect detection using Machine Learning while demonstrating how **Agentic AI components** can organize and enhance AI workflows.
 
 ---
 
-## Dataset
+# Dataset
 
-Dataset: NEU Surface Defect Database
+**Dataset:** NEU Surface Defect Database
 
 ### Dataset Statistics
 
-* Total Images: 1800
-* Number of Classes: 6
-* Images per Class: 300
-* Dataset Type: Balanced
+* Total Images: **1800**
+* Number of Classes: **6**
+* Images per Class: **300**
+* Dataset Type: **Balanced**
 
 ### Defect Classes
-
-1. Crazing
-2. Inclusion
-3. Patches
-4. Pitted Surface
-5. Rolled-in Scale
-6. Scratches
-
----
-
-## Project Workflow
-
-Image Input
-↓
-Image Preprocessing
-↓
-Color Histogram Feature Extraction
-(96 Features)
-↓
-Feature Normalization
-↓
-Train-Test Split
-↓
-Decision Tree / Random Forest
-↓
-Model Evaluation
-↓
-Streamlit Web Application
-↓
-Defect Prediction
-
----
-
-## Feature Extraction
-
-Color Histogram was used to represent each image as a numerical feature vector.
-
-### Histogram Configuration
-
-* Red Channel: 32 bins
-* Green Channel: 32 bins
-* Blue Channel: 32 bins
-
-Total Features:
-
-96 Features = 32 + 32 + 32
-
-The extracted histogram features were normalized before training the machine learning models.
-
----
-
-## Machine Learning Models
-
-### Decision Tree Classifier
-
-The Decision Tree model serves as the primary classification algorithm.
-
-**Accuracy:** 93%
-
-### Random Forest Classifier
-
-An ensemble learning approach using 100 decision trees was implemented to improve classification performance.
-
-**Parameters:**
-
-* n_estimators = 100
-* random_state = 42
-
-**Accuracy:** 95%
-
----
-
-## Performance Comparison
-
-| Model         | Accuracy |
-| ------------- | -------- |
-| Decision Tree | 93%      |
-| Random Forest | 95%      |
-
-Random Forest achieved higher accuracy by reducing overfitting and improving generalization performance.
-
----
-
-## Web Application
-
-The trained model was deployed using Streamlit, allowing users to interact with the system through a simple web interface.
-
-### Features
-
-* Upload defect images
-* Automatic feature extraction
-* Real-time defect prediction
-* Support for six defect categories
-* User-friendly interface
-* Fast prediction results
-
----
-
-## Prediction Output
-
-The system predicts one of the following defect classes:
 
 * Crazing
 * Inclusion
@@ -137,62 +36,184 @@ The system predicts one of the following defect classes:
 * Rolled-in Scale
 * Scratches
 
-The application displays the predicted defect category immediately after image upload and analysis.
+---
+
+# Project Workflow
+
+```text
+Upload Image
+        │
+        ▼
+🪝 Preprocessing Hook
+        │
+        ▼
+Feature Extraction
+(Color Histogram - 96 Features)
+        │
+        ▼
+Feature Normalization
+        │
+        ▼
+Random Forest Model
+        │
+        ▼
+Defect Prediction
+        │
+        ▼
+🤖 Paint Detection Agent
+        │
+        ▼
+AI Analysis Report
+```
 
 ---
 
-## Technologies Used
+# Machine Learning Model
+
+# Decision Tree Classifier
+
+The Decision Tree model serves as the primary classification algorithm.
+
+* Accuracy: **93%**
+
+## Random Forest Classifier
+
+* Algorithm: Random Forest
+* Accuracy: **94.79%**
+* Number of Classes: 6
+
+The model predicts one of the six surface defect categories based on extracted color histogram features.
+
+---
+
+# Agentic AI Components
+
+This project demonstrates the integration of **Agentic AI** concepts into a Machine Learning application.
+
+## 🧠 Skill
+
+**Paint Defect Detection Skill**
+
+Defines the AI's specialization in analyzing paint and surface defects and generating structured defect reports.
+
+---
+
+## 🤖 Agent
+
+**Paint Detection Agent**
+
+Responsible for generating an intelligent analysis report after the machine learning model predicts the defect.
+
+---
+
+## 📝 Prompt
+
+**Defect Analysis Prompt**
+
+Provides structured instructions to the agent for generating meaningful explanations based on the predicted defect.
+
+---
+
+## 📋 Instructions
+
+Project-specific rules that define how the AI agent should respond, including report formatting and analysis behavior.
+
+---
+
+## 🪝 Hook
+
+**Preprocessing Hook**
+
+Automatically executes before prediction by preprocessing the uploaded image, demonstrating automated workflow execution.
+
+---
+
+# Features
+
+* Upload steel surface images
+* Automatic preprocessing using Hooks
+* Color histogram feature extraction
+* Random Forest and Decision Tree prediction
+* AI-generated analysis report
+* Streamlit web interface
+* Modular Agentic AI architecture
+
+---
+
+# Technologies Used
 
 ### Programming Language
 
 * Python
 
+### Machine Learning
+
+* Scikit-Learn
+* Random Forest Classifier
+
 ### Libraries
 
 * OpenCV
 * NumPy
-* Scikit-Learn
 * Joblib
 * Streamlit
-* Matplotlib
-* Seaborn
+* Pillow
 
 ---
 
-## Project Structure
+# Project Structure
 
 ```text
-paint-defect-detection/
+Paint_Defect_Detection_System/
 │
 ├── app.py
 ├── Paint_Defect_Detection_Model.pkl
-├── Paint_Defect_Detection.ipynb
+├── requirements.txt
 ├── README.md
-├── dataset/
 │
-├── images/
+├── agents/
+│   ├── paint_detection_agent.py
+│   └── paint_detection_agent.md
 │
-└── requirements.txt
+├── hooks/
+│   └── preprocess_hook.py
+│
+├── skills/
+│   └── SKILL.md
+│
+├── prompts/
+│   └── defect_prompts.md
+│
+├── instructions/
+│   └── instructions.md
+│
+├── Paint_Defect_Detection.ipynb
+└── check_model.py
 ```
 
 ---
 
-## Installation
+# Installation
 
-Clone the repository:
+Clone the repository
 
 ```bash
-git clone <repository-link>
-cd paint-defect-detection
+git clone https://github.com/KeerthanadeviBaskaran/Paint_Defect_Detection_System.git
 ```
 
-Install dependencies:
+Move into the project folder
+
+```bash
+cd Paint_Defect_Detection_System
+```
+
+Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the Streamlit application:
+Run the Streamlit application
 
 ```bash
 streamlit run app.py
@@ -200,27 +221,28 @@ streamlit run app.py
 
 ---
 
-## Results
+# Results
 
-* Decision Tree achieved 93% classification accuracy.
-* Random Forest achieved 95% classification accuracy.
-* The model successfully classifies six different surface defect categories.
-* Streamlit deployment enables real-time prediction through a web interface.
-
----
-
-## Key Learnings
-
-* Image data can be represented using color histogram features.
-* Feature normalization improves model performance.
-* Ensemble models such as Random Forest provide better accuracy than a single Decision Tree.
-* Streamlit simplifies machine learning model deployment.
-* End-to-end machine learning projects require data preprocessing, model development, evaluation, and deployment.
+* Random Forest achieved **94.79%** accuracy.
+* Successfully classifies six steel surface defect categories.
+* Real-time prediction using Streamlit.
+* Generates an AI analysis report using an Agent.
+* Demonstrates Skills, Prompts, Instructions, and Hooks within an Agentic AI workflow.
 
 ---
 
-## Author
+# Future Enhancements
 
-Keerthanadevi Baskaran
+* Add a **Normal (No Defect)** class.
+* Integrate Gemini/OpenAI for advanced AI-generated reports.
+* Implement an MCP Server for external tool integration.
+* Support multiple defect detection within a single image.
+* Add confidence score visualization.
 
-Machine Learning | Computer Vision | Artificial Intelligence
+---
+
+# Author
+
+**Keerthanadevi Baskaran**
+
+Machine Learning | Artificial Intelligence | Computer Vision | Agentic AI
