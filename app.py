@@ -9,6 +9,27 @@ from sklearn.preprocessing import normalize
 # PAGE CONFIG
 # ----------------------------
 
+# Load Agents
+from agents.paint_detection_agent import generate_report
+
+# Load Hooks
+from hooks.preprocess_hook import preprocess_hook
+
+# Load Skill
+
+with open("skills/SKILL.md", "r") as f:
+    skill = f.read()
+
+# Load Instructions
+
+with open("instructions/instructions.md", "r") as f:
+    instructions = f.read()
+
+# Load Prompts
+
+with open("prompts/defect_prompts.md", "r") as f:
+    prompt_template = f.read()
+
 st.set_page_config(
     page_title="Paint Defect Detection",
     page_icon="🎨",
@@ -68,7 +89,7 @@ def extract_features(image):
 # UI
 # ----------------------------
 
-st.title("🔍 Paint Defect Detection")
+st.title("🎨 Paint Defect Detection")
 
 st.markdown(
     """
@@ -111,6 +132,10 @@ if uploaded_file is not None:
                 img_array,
                 cv2.COLOR_RGB2BGR
             )
+        # -------------------------
+        # HOOK EXECUTES HERE
+        # -------------------------
+        img_array = preprocess_hook(img_array)
 
         features = extract_features(img_array)
 
@@ -119,6 +144,17 @@ if uploaded_file is not None:
         prediction = model.predict(features)
 
         predicted_class = prediction[0]
+
+        report = generate_report(
+                predicted_class,
+                skill,
+                instructions,
+                prompt_template
+            )
+
+        st.subheader("Agent Analysis Report")
+
+        st.success(report)
 
         st.success(
             f"Detected Defect: {predicted_class}"
@@ -169,3 +205,17 @@ Classes:
 - rolled-in_scale
 - scratches
 """)
+
+# ------------------
+# SIDEBAR
+# ------------------
+
+st.sidebar.write("Agent : Paint Detection Agent")
+
+st.sidebar.write("Skill : Paint Defect Detection")
+
+st.sidebar.write("Hook : Preporocessing Hook")
+
+st.sidebar.write("Prompt : Defect Analysis Prompt")
+
+st.sidebar.write("Instructions : Enabled")
